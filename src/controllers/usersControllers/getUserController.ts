@@ -1,20 +1,16 @@
 import { Request, Response } from "express";
-// import { getUser } from "../../services/users/getUser";
+import { getUser } from "../../services/users/getUser";
+
+// TODO: use query - populate
 
 // @desc    get a user
-// @route   GET /api/v1/users/:id
+// @route   GET /api/v1/users/:uid
 // @access  Private
-// @param   {string} id - User ID.
-// @query   {boolean} full - Optional. to fully populate the user.
-export const getUserController = async (
-  req: Request<{ id: string }, {}, {}, { full: string }>,
-  res: Response
-) => {
-  // const id = req.params.id;
-  // //convert to bollean
-  // const full = req.query.full === "true";
+// @param   {string} uid - User ID.
+export const getUserController = async (req: Request, res: Response) => {
+  const id = req.params.uid;
 
-  // const data = await getUser(id, full);
+  const data = await getUser(id);
 
-  res.status(200).json("getUserController");
+  res.status(200).json(data);
 };

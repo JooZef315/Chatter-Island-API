@@ -7,8 +7,9 @@ import {
   editUserController,
   deleteUserController,
   deleteFriendController,
-  friendRequestController,
   getFriendsController,
+  addFriendController,
+  confirmFriendController,
 } from "../controllers";
 import { initUpload } from "../config/multer";
 
@@ -30,5 +31,7 @@ usersRouter
 usersRouter
   .route("/:uid/friends")
   .get(asyncHandler(getFriendsController)) //verify friends of friends
-  .post(asyncHandler(friendRequestController)) //send-confirm friend request
-  .delete(asyncHandler(deleteFriendController)); //delete friend-friend request
+  .delete(asyncHandler(deleteFriendController));
+
+usersRouter.post("/:uid/addFriend", asyncHandler(addFriendController));
+usersRouter.put("/:uid/confirmFriend", asyncHandler(confirmFriendController));

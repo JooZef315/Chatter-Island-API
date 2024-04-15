@@ -6,8 +6,13 @@ export const userZodSchema = z
       .string()
       .trim()
       .min(1, { message: "username is required" })
+      .toLowerCase()
       .transform((val) => val.trim().replace(/\s+/g, "_")),
-    email: z.string().email("This is not a valid email.").toLowerCase(),
+    bio: z
+      .string()
+      .trim()
+      .max(50, { message: "bio must be at most 50 characters long" })
+      .optional(),
     password: z
       .string()
       .min(4, { message: "Password must be at least 4 characters long" }),

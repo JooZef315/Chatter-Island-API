@@ -8,7 +8,8 @@ export { getUserController } from "./usersControllers/getUserController";
 export { editUserController } from "./usersControllers/editUserController";
 export { deleteUserController } from "./usersControllers/deleteUserController";
 export { getFriendsController } from "./usersControllers/getFriendsController";
-export { friendRequestController } from "./usersControllers/friendRequestController";
+export { addFriendController } from "./usersControllers/addFriendController";
+export { confirmFriendController } from "./usersControllers/confirmFriendController";
 export { deleteFriendController } from "./usersControllers/deleteFriendController";
 
 export { getChatsController } from "./chatsControllers/getChatsController";

@@ -1,8 +1,8 @@
 import { Request, Response } from "express";
-import { removeFriend } from "../../services/users/removeFriend";
+import { addFriend } from "../../services/users/addFriend";
 
-// @desc    unfriend a user
-// @route   DELETE /api/v1/users/:uid/follow
+// @desc    send friend request to a user
+// @route   POST /api/v1/users/:uid/addFriend
 // @access  Private
 // @param   {string} uid - User ID.
 
@@ -12,14 +12,14 @@ import { removeFriend } from "../../services/users/removeFriend";
 //   userRole: string;
 // };
 
-export const deleteFriendController = async (req: Request, res: Response) => {
+export const addFriendController = async (req: Request, res: Response) => {
   const id = req.params.uid;
 
   const currentUserId: string = req.body.currentUserId;
 
-  await removeFriend(id, currentUserId);
+  await addFriend(id, currentUserId);
 
   res.status(200).json({
-    message: `you are now unfriended successfully`,
+    message: `your friend request was sent successfully`,
   });
 };

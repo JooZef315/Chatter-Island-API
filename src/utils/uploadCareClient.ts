@@ -4,7 +4,7 @@ import { CustomError } from "./customErrors";
 
 export const uploadCareClient = async (Imagepath: string) => {
   const client = new UploadClient({
-    publicKey: process.env.UPLOADCARE_SECRET || "",
+    publicKey: process.env.UPLOADCARE_SECRET!,
   });
   try {
     const imageBuffer = await fs.promises.readFile(Imagepath);
