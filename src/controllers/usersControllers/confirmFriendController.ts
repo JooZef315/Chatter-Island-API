@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import { confirmFriend } from "../../services/users/confirmFriend";
 
 // @desc    confirm friend request from a user
-// @route   POST /api/v1/users/:uid/addFriend
+// @route   PUT /api/v1/users/:uid/confirmFriend
 // @access  Private
 // @param   {string} uid - User ID.
 
@@ -20,6 +20,7 @@ export const confirmFriendController = async (req: Request, res: Response) => {
   await confirmFriend(id, currentUserId);
 
   res.status(200).json({
-    message: `friend request was confirmed successfully`,
+    message:
+      "friend request was confirmed successfully, now you can chat with each other!",
   });
 };

@@ -1,7 +1,7 @@
 import express from "express";
 import asyncHandler from "express-async-handler";
 import {
-  addMessageController,
+  sendMessageController,
   deleteMessageController,
   getChatController,
   getChatsController,
@@ -16,7 +16,7 @@ chatsRouter.get("/", asyncHandler(getChatsController));
 
 chatsRouter
   .route("/:cid")
-  .get(asyncHandler(getChatController)) //get all chat
-  .post(uploadImage.single("image"), asyncHandler(addMessageController)); //add message
+  .get(asyncHandler(getChatController))
+  .post(uploadImage.single("image"), asyncHandler(sendMessageController));
 
 chatsRouter.route("/:cid/:mid").delete(asyncHandler(deleteMessageController)); //delete message

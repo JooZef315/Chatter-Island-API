@@ -2,6 +2,7 @@ import { db } from "../../config/DB";
 import { friends, users } from "../../drizzle/schema";
 import { and, eq } from "drizzle-orm";
 import { CustomError } from "../../utils/customErrors";
+import { createChat } from "../chats/createChat";
 
 export const confirmFriend = async (id: string, currentUserId: string) => {
   const user = await db
@@ -53,4 +54,6 @@ export const confirmFriend = async (id: string, currentUserId: string) => {
     .update(friends)
     .set({ status: "FRIENDS" })
     .where(and(eq(friends.user1, id), eq(friends.user2, currentUserId)));
+
+  await createChat(FriendShip[0].user1, FriendShip[0].user2);
 };

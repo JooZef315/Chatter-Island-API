@@ -16,7 +16,6 @@ export const getUser = async (id: string) => {
     .from(users)
     .where(eq(users.id, id));
 
-  console.log(user);
   if (!user.length) {
     throw new CustomError("user not found", 404);
   }

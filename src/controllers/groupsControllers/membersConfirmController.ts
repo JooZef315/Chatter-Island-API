@@ -5,10 +5,10 @@ import { Request, Response } from "express";
 // @access  Private
 // @param   {string} id - User ID.
 
-export const membersRequestController = async (req: Request, res: Response) => {
+export const membersConfirmController = async (req: Request, res: Response) => {
   const paramId = req.params.id;
 
   res.status(200).json({
-    message: `membersRequestController`,
+    message: `membersConfirmController`,
   });
 };

@@ -14,7 +14,7 @@ export { deleteFriendController } from "./usersControllers/deleteFriendControlle
 
 export { getChatsController } from "./chatsControllers/getChatsController";
 export { getChatController } from "./chatsControllers/getChatController";
-export { addMessageController } from "./chatsControllers/addMessageController";
+export { sendMessageController } from "./chatsControllers/sendMessageController";
 export { deleteMessageController } from "./chatsControllers/deleteMessageController";
 
 export { getGroupsController } from "./groupsControllers/getGroupsController";
@@ -26,4 +26,4 @@ export { addGroupMessageController } from "./groupsControllers/addGroupMessageCo
 export { joinGroupController } from "./groupsControllers/joinGroupController";
 export { getMembersController } from "./groupsControllers/getMembersController";
 export { removeMemberController } from "./groupsControllers/removeMemberController";
-export { membersRequestController } from "./groupsControllers/membersRequestController";
+export { membersConfirmController } from "./groupsControllers/membersConfirmController";

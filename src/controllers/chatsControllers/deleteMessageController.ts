@@ -1,14 +1,21 @@
 import { Request, Response } from "express";
+import { deleteMessage } from "../../services/chats/deleteMessage";
 
-// @desc    follow/unfollow a user
-// @route   POST /api/v1/users/:id/follow
+// @desc    delete a message
+// @route   DELETE /api/v1/chats/:cid/:mid
 // @access  Private
-// @param   {string} id - User ID.
+// @param   {string} cid - chat ID.
+// @param   {string} mid - message ID.
 
 export const deleteMessageController = async (req: Request, res: Response) => {
-  const paramId = req.params.id;
+  const cid = req.params.cid;
+  const mid = req.params.mid;
+
+  const currentUserId: string = req.body.currentUserId;
+
+  await deleteMessage(currentUserId, cid, mid);
 
   res.status(200).json({
-    message: `deleteMessageController`,
+    message: "message was deleted successfully",
   });
 };

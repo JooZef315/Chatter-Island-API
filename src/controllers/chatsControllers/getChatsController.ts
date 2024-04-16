@@ -1,14 +1,20 @@
 import { Request, Response } from "express";
+import { getChats } from "../../services/chats/getChats";
+import { CustomError } from "../../utils/customErrors";
 
-// @desc    follow/unfollow a user
-// @route   POST /api/v1/users/:id/follow
+// @desc    get all the chats for the current user
+// @route   POST /api/v1/chats
 // @access  Private
-// @param   {string} id - User ID.
 
+// type authenticatedRequest = Request & {
+//   userId: string;
+//   username: string;
+//   userRole: string;
+// };
 export const getChatsController = async (req: Request, res: Response) => {
-  const paramId = req.params.id;
+  const currentUserId: string = req.body.currentUserId;
 
-  res.status(200).json({
-    message: `getChatsController`,
-  });
+  const data = await getChats(currentUserId);
+
+  res.status(200).json(data);
 };

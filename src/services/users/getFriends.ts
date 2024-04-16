@@ -12,7 +12,7 @@ export const getFriends = async (id: string) => {
       statue: friends.status,
     })
     .from(users)
-    .innerJoin(
+    .leftJoin(
       friends,
       or(eq(users.id, friends.user1), eq(users.id, friends.user2))
     )

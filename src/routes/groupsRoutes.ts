@@ -10,7 +10,7 @@ import {
   getGroupsController,
   getMembersController,
   joinGroupController,
-  membersRequestController,
+  membersConfirmController,
   removeMemberController,
 } from "../controllers";
 
@@ -32,9 +32,9 @@ groupsRouter
 
 groupsRouter.post("/:gid/join", asyncHandler(joinGroupController));
 
-groupsRouter
-  .route("/:gid/members")
-  .get(asyncHandler(getMembersController)) //get members (group admin)
-  .put(asyncHandler(membersRequestController)); //confirm-delete join request (group admin)
+groupsRouter.route("/:gid/members").get(asyncHandler(getMembersController)); //get members (group admin)
 
-groupsRouter.delete("/:gid/members/:uid", asyncHandler(removeMemberController)); //remove member (group admin)
+groupsRouter
+  .route("/:gid/members/:uid")
+  .put(asyncHandler(membersConfirmController)) //confirm (group admin)
+  .delete(asyncHandler(removeMemberController)); //remove member-delete join request (group admin)
