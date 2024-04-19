@@ -1,14 +1,28 @@
 import { Request, Response } from "express";
+import { confirmJoinReq } from "../../services/groups/confirmJoinReq";
 
-// @desc    follow/unfollow a user
-// @route   POST /api/v1/users/:id/follow
+// @desc    confirm join request to a group from a user
+// @route   PUT /api/v1/groups/:gid/members/:uid
 // @access  Private
-// @param   {string} id - User ID.
+// @param   {string} gid - Group ID.
+// @param   {string} uid - User ID.
+
+// type authenticatedRequest = Request & {
+//   userId: string;
+//   username: string;
+//   userRole: string;
+// };
 
 export const membersConfirmController = async (req: Request, res: Response) => {
-  const paramId = req.params.id;
+  const uid = req.params.uid;
+  const gid = req.params.gid;
+
+  const currentUserId: string = req.body.currentUserId;
+
+  await confirmJoinReq(gid, uid, currentUserId);
 
   res.status(200).json({
-    message: `membersConfirmController`,
+    message:
+      "join request was confirmed successfully, now you can chat with other members of the group!",
   });
 };

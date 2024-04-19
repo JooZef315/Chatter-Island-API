@@ -1,14 +1,20 @@
 import { Request, Response } from "express";
+import { removeMember } from "../../services/groups/removeMember";
 
-// @desc    follow/unfollow a user
-// @route   POST /api/v1/users/:id/follow
+// @desc    remove a member / delete join request
+// @route   DELETE /api/v1/groups/:gid/members/:uid
 // @access  Private
-// @param   {string} id - User ID.
-
+// @param   {string} gid - Group ID.
+// @param   {string} uid - User ID.
 export const removeMemberController = async (req: Request, res: Response) => {
-  const paramId = req.params.id;
+  const uid = req.params.uid;
+  const gid = req.params.gid;
+
+  const currentUserId: string = req.body.currentUserId;
+
+  const member = await removeMember(gid, uid, currentUserId);
 
   res.status(200).json({
-    message: `removeMemberController`,
+    message: "the member is no longer a member in the group",
   });
 };

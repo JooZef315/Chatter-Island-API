@@ -1,14 +1,17 @@
 import { Request, Response } from "express";
+import { deleteGroup } from "../../services/groups/deleteGroup";
 
-// @desc    follow/unfollow a user
-// @route   POST /api/v1/users/:id/follow
+// @desc    delete a group
+// @route   DELETE /api/v1/groups/:gid
 // @access  Private
-// @param   {string} id - User ID.
-
+// @param   {string} gid - group ID.
 export const deleteGroupController = async (req: Request, res: Response) => {
-  const paramId = req.params.id;
+  const id = req.params.gid;
+  const currentUserId: string = req.body.currentUserId;
+
+  const deletedGroup = await deleteGroup(id, currentUserId);
 
   res.status(200).json({
-    message: `deleteGroupController`,
+    message: `group ${deletedGroup.name} was deleted successfully`,
   });
 };

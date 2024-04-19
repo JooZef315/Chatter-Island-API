@@ -1,14 +1,11 @@
 import { Request, Response } from "express";
+import { getGroups } from "../../services/groups/getGroups";
 
-// @desc    follow/unfollow a user
-// @route   POST /api/v1/users/:id/follow
+// @desc    get all groups
+// @route   GET /api/v1/groups
 // @access  Private
-// @param   {string} id - User ID.
-
 export const getGroupsController = async (req: Request, res: Response) => {
-  const paramId = req.params.id;
+  const data = await getGroups();
 
-  res.status(200).json({
-    message: `getGroupsController`,
-  });
+  res.status(200).json(data);
 };

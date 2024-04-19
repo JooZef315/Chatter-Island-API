@@ -8,6 +8,20 @@
       "when": 1713119844394,
       "tag": "0000_groovy_scarlet_spider",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1713541483303,
+      "tag": "0001_first_betty_ross",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1713547950122,
+      "tag": "0002_optimal_quasar",
+      "breakpoints": true
     }
   ]
 }

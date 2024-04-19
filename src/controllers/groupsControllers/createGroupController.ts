@@ -1,14 +1,21 @@
 import { Request, Response } from "express";
+import { validateGroup } from "../../validators/groupValidator";
+import { CustomError } from "../../utils/customErrors";
+import { createGroup } from "../../services/groups/createGroup";
 
-// @desc    follow/unfollow a user
-// @route   POST /api/v1/users/:id/follow
+// @desc    create a group
+// @route   POST /api/v1/groups/
 // @access  Private
-// @param   {string} id - User ID.
-
 export const createGroupController = async (req: Request, res: Response) => {
-  const paramId = req.params.id;
+  const currentUserId: string = req.body.currentUserId;
 
-  res.status(200).json({
-    message: `createGroupController`,
-  });
+  const { groupData, error } = validateGroup(req.body);
+
+  if (error) {
+    throw new CustomError(error.message, 400);
+  }
+
+  const group = await createGroup(groupData, currentUserId);
+
+  res.status(200).json(group);
 };

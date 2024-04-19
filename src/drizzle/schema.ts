@@ -14,6 +14,11 @@ import { relations } from "drizzle-orm";
 
 export const roleEnum = pgEnum("roleEnum", ["USER", "ADMIN"]);
 export const friendsEnum = pgEnum("friendsEnum", ["FRIENDS", "PENDING"]);
+export const membersEnum = pgEnum("friendsEnum", [
+  "JOINED",
+  "PENDING",
+  "MODERATOR",
+]);
 
 export const users = pgTable("users", {
   id: uuid("id").primaryKey().defaultRandom(),
@@ -82,6 +87,7 @@ export const members = pgTable(
     groupId: uuid("groupId")
       .references(() => groups.id, { onDelete: "cascade", onUpdate: "cascade" })
       .notNull(),
+    status: membersEnum("status").default("PENDING").notNull(),
   },
   (table) => ({
     unq: unique("unique_membership").on(table.userId, table.groupId),

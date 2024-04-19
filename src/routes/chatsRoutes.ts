@@ -19,4 +19,4 @@ chatsRouter
   .get(asyncHandler(getChatController))
   .post(uploadImage.single("image"), asyncHandler(sendMessageController));
 
-chatsRouter.route("/:cid/:mid").delete(asyncHandler(deleteMessageController)); //delete message
+chatsRouter.route("/:cid/:mid").delete(asyncHandler(deleteMessageController));

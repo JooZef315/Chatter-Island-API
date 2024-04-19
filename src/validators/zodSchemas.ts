@@ -25,3 +25,18 @@ export const userZodSchema = z
     message: "Passwords don't match",
     path: ["confirmPasswrod"],
   });
+
+export const groupZodSchema = z.object({
+  name: z
+    .string()
+    .trim()
+    .min(1, { message: "name is required" })
+    .transform((val) => val.trim().replace(/\s+/g, "-")),
+  description: z
+    .string()
+    .trim()
+    .max(100, { message: "description must be at most 100 characters long" })
+    .optional()
+    .default("this is a new group chat on chatter island!"),
+  capacity: z.literal(3).or(z.literal(10)).or(z.literal(25)).or(z.literal(50)),
+});

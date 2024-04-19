@@ -20,7 +20,7 @@ export const createUserController = async (req: Request, res: Response) => {
   }
 
   const newUser = await createUser(userData);
-  console.log(newUser);
+
   res.status(200).json({
     message: `new user ${newUser.username} was created successfully, please login`,
   });
