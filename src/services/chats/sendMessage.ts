@@ -3,11 +3,15 @@ import { db } from "../../config/DB";
 import { chats, messages, users } from "../../drizzle/schema";
 import { and, eq } from "drizzle-orm";
 
+type Params = {
+  cid: string;
+  content: string;
+  parentId: string;
+  profilePicUrl: string | undefined;
+};
 export const sendMessage = async (
-  cid: string,
   currentUserId: string,
-  content: string,
-  parentId: string
+  { cid, content, parentId, profilePicUrl }: Params
 ) => {
   const sender = await db
     .select()
@@ -39,7 +43,7 @@ export const sendMessage = async (
     .values({
       senderId: currentUserId,
       chatId: cid,
-      content,
+      content: profilePicUrl || content,
       parentId: parentId || null,
     })
     .returning();

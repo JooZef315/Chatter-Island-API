@@ -25,8 +25,8 @@ groupsRouter
 
 groupsRouter
   .route("/:gid")
-  .get(asyncHandler(getGroupController)) //get all chat
-  .post(uploadImage.single("image"), asyncHandler(addGroupMessageController)) //add message
+  .get(asyncHandler(getGroupController))
+  .post(uploadImage.single("image"), asyncHandler(addGroupMessageController))
   .put(asyncHandler(editGroupController))
   .delete(asyncHandler(deleteGroupController));
 

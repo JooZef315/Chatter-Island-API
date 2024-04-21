@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import { sendMessage } from "../../services/chats/sendMessage";
 import { CustomError } from "../../utils/customErrors";
+import { uploadCareClient } from "../../utils/uploadCareClient";
 
 // @desc    send a new message to a user
 // @route   POST /api/v1/chats/:cid
@@ -19,12 +20,28 @@ export const sendMessageController = async (req: Request, res: Response) => {
   const currentUserId: string = req.body.currentUserId;
   const content: string = req.body.content;
   const parentId: string = req.body.parentId || "";
+  let profilePicUrl: string | undefined;
 
-  if (!content || !content.trim()) {
-    throw new CustomError("message content is required", 400);
+  if (!content && !req.file) {
+    throw new CustomError("message content (text or image) is required", 400);
   }
 
-  const message = await sendMessage(cid, currentUserId, content, parentId);
+  if (!content?.trim() && !req.file) {
+    throw new CustomError("message content (text or image) is required", 400);
+  }
+
+  if (req.file) {
+    profilePicUrl = (await uploadCareClient(req.file.path)) || undefined;
+  }
+
+  const messageData = {
+    cid,
+    content,
+    parentId,
+    profilePicUrl,
+  };
+
+  const message = await sendMessage(currentUserId, messageData);
 
   res.status(200).json(message);
 };
