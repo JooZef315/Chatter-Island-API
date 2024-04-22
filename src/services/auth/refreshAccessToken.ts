@@ -30,13 +30,13 @@ export const refreshAccessToken = async (refreshToken: string) => {
 
     const accessToken = jwt.sign(
       {
-        id: user.id,
+        userId: user.id,
         username: user.username,
         role: user.role,
       },
       ACCESS_TOKEN_SECRET,
       {
-        expiresIn: "2m",
+        expiresIn: "15m",
       }
     );
 

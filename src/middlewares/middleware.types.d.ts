@@ -2,7 +2,7 @@ import { Request } from "express";
 import { JwtPayload } from "jsonwebtoken";
 
 export type DecodedData = JwtPayload & {
-  id: string;
+  userId: string;
   username: string;
   role: string;
 };

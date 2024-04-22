@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { joinGroup } from "../../services/groups/joinGroup";
+import { authenticatedRequest } from "../../middlewares/middleware.types";
 
 // @desc    send a join request to a group
 // @route   POST /api/v1/groups/:gid/join
@@ -8,7 +9,7 @@ import { joinGroup } from "../../services/groups/joinGroup";
 export const joinGroupController = async (req: Request, res: Response) => {
   const id = req.params.gid;
 
-  const currentUserId: string = req.body.currentUserId;
+  const currentUserId: string = (req as authenticatedRequest).userId;
 
   await joinGroup(id, currentUserId);
 

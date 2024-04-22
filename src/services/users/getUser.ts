@@ -33,7 +33,7 @@ export const getUser = async (id: string) => {
     throw new CustomError("user not found", 404);
   }
 
-  //nest the moderated groups of the user
+  // nest the moderated groups of the user
   const moderatedGroups: ({ id: string; name: string } | null)[] = [];
   user.forEach((u) => moderatedGroups.push(u.moderator_at));
 

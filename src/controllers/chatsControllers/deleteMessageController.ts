@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { deleteMessage } from "../../services/chats/deleteMessage";
+import { authenticatedRequest } from "../../middlewares/middleware.types";
 
 // @desc    delete a message
 // @route   DELETE /api/v1/chats/:cid/:mid
@@ -11,7 +12,7 @@ export const deleteMessageController = async (req: Request, res: Response) => {
   const cid = req.params.cid;
   const mid = req.params.mid;
 
-  const currentUserId: string = req.body.currentUserId;
+  const currentUserId: string = (req as authenticatedRequest).userId;
 
   await deleteMessage(currentUserId, cid, mid);
 

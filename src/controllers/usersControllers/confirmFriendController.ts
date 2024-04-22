@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { confirmFriend } from "../../services/users/confirmFriend";
+import { authenticatedRequest } from "../../middlewares/middleware.types";
 
 // @desc    confirm friend request from a user
 // @route   PUT /api/v1/users/:uid/confirmFriend
@@ -15,7 +16,7 @@ import { confirmFriend } from "../../services/users/confirmFriend";
 export const confirmFriendController = async (req: Request, res: Response) => {
   const id = req.params.uid;
 
-  const currentUserId: string = req.body.currentUserId;
+  const currentUserId: string = (req as authenticatedRequest).userId;
 
   await confirmFriend(id, currentUserId);
 

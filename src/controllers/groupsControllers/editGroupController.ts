@@ -9,15 +9,13 @@ import { editGroup } from "../../services/groups/editGroup";
 // @param   {string} gid - group ID.
 export const editGroupController = async (req: Request, res: Response) => {
   const id = req.params.gid;
-  const currentUserId: string = req.body.currentUserId;
-
   const { groupData, error } = validateGroup(req.body);
 
   if (error) {
     throw new CustomError(error.message, 400);
   }
 
-  const updatedGroup = await editGroup(id, groupData, currentUserId);
+  const updatedGroup = await editGroup(id, groupData);
 
   res.status(200).json(updatedGroup);
 };

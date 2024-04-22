@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { removeFriend } from "../../services/users/removeFriend";
+import { authenticatedRequest } from "../../middlewares/middleware.types";
 
 // @desc    unfriend a user
 // @route   DELETE /api/v1/users/:uid/follow
@@ -15,7 +16,7 @@ import { removeFriend } from "../../services/users/removeFriend";
 export const deleteFriendController = async (req: Request, res: Response) => {
   const id = req.params.uid;
 
-  const currentUserId: string = req.body.currentUserId;
+  const currentUserId: string = (req as authenticatedRequest).userId;
 
   await removeFriend(id, currentUserId);
 

@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { confirmJoinReq } from "../../services/groups/confirmJoinReq";
+import { authenticatedRequest } from "../../middlewares/middleware.types";
 
 // @desc    confirm join request to a group from a user
 // @route   PUT /api/v1/groups/:gid/members/:uid
@@ -17,7 +18,7 @@ export const membersConfirmController = async (req: Request, res: Response) => {
   const uid = req.params.uid;
   const gid = req.params.gid;
 
-  const currentUserId: string = req.body.currentUserId;
+  const currentUserId: string = (req as authenticatedRequest).userId;
 
   await confirmJoinReq(gid, uid, currentUserId);
 

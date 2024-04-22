@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { getFriends } from "../../services/users/getFriends";
+import { authenticatedRequest } from "../../middlewares/middleware.types";
 
 // @desc    get a user friends
 // @route   GET /api/v1/users/:uid/friends
@@ -14,7 +15,7 @@ import { getFriends } from "../../services/users/getFriends";
 
 export const getFriendsController = async (req: Request, res: Response) => {
   const id = req.params.uid;
-  const currentUserId: string = req.body.currentUserId;
+  const currentUserId: string = (req as authenticatedRequest).userId;
 
   const data = await getFriends(id, currentUserId);
 

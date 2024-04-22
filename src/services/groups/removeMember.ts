@@ -1,6 +1,6 @@
 import { db } from "../../config/DB";
 import { groups, members, users } from "../../drizzle/schema";
-import { and, eq, ne } from "drizzle-orm";
+import { and, eq } from "drizzle-orm";
 import { CustomError } from "../../utils/customErrors";
 
 export const removeMember = async (
@@ -35,7 +35,7 @@ export const removeMember = async (
     group[0].moderator != currentUserId &&
     existedMembership[0].userId != currentUserId
   ) {
-    throw new CustomError("unAuth!", 401);
+    throw new CustomError("user Unauthorized!", 401);
   }
 
   if (existedMembership[0].status == "MODERATOR") {

@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import { CustomError } from "../../utils/customErrors";
 import { uploadCareClient } from "../../utils/uploadCareClient";
 import { sendGroupMessage } from "../../services/groups/sendGroupMessage";
+import { authenticatedRequest } from "../../middlewares/middleware.types";
 
 // @desc    send a new message to a group
 // @route   POST /api/v1/groups/:gid
@@ -20,7 +21,7 @@ export const addGroupMessageController = async (
 ) => {
   const gid = req.params.gid;
 
-  const currentUserId: string = req.body.currentUserId;
+  const currentUserId: string = (req as authenticatedRequest).userId;
   const content: string = req.body.content;
   const parentId: string = req.body.parentId || "";
   let profilePicUrl: string | undefined;

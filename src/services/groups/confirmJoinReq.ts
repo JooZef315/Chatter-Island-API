@@ -22,10 +22,6 @@ export const confirmJoinReq = async (
     throw new CustomError("id/ids not vaild", 400);
   }
 
-  if (group[0].moderator != currentUserId) {
-    throw new CustomError("unAuth!", 401);
-  }
-
   const existedMembership = await db
     .select()
     .from(members)

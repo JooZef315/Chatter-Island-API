@@ -4,19 +4,11 @@ import { and, eq, ne } from "drizzle-orm";
 import { TGroup } from "../../validators/zodTypes";
 import { CustomError } from "../../utils/customErrors";
 
-export const editGroup = async (
-  id: string,
-  groupData: TGroup,
-  currentUserId: string
-) => {
+export const editGroup = async (id: string, groupData: TGroup) => {
   const group = await db.select().from(groups).where(eq(groups.id, id));
 
   if (!group.length) {
     throw new CustomError("gid not valid", 400);
-  }
-
-  if (group[0].moderator != currentUserId) {
-    throw new CustomError("unAuth!", 401);
   }
 
   const existedGroupWithSameName = await db

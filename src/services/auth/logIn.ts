@@ -33,13 +33,13 @@ export const logIn = async (username: string, password: string) => {
 
   const accessToken = jwt.sign(
     {
-      id: user[0].id,
+      userId: user[0].id,
       username: user[0].username,
       role: user[0].role,
     },
     ACCESS_TOKEN_SECRET,
     {
-      expiresIn: "2m",
+      expiresIn: "15m",
     }
   );
 

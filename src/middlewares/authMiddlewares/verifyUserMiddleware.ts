@@ -11,13 +11,13 @@ export const verifyUser = async (
 ) => {
   const decodedData = verifyToken(req.headers.authorization) as DecodedData;
 
-  const user = await getUser(decodedData.id);
+  const user = await getUser(decodedData.userId);
 
   if (!user.id) {
     throw new CustomError("invalid token payload", 401);
   }
 
-  (req as authenticatedRequest).userId = decodedData.id;
+  (req as authenticatedRequest).userId = decodedData.userId;
   (req as authenticatedRequest).username = decodedData.username;
   (req as authenticatedRequest).userRole = decodedData.role;
 

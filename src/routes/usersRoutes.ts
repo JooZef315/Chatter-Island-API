@@ -12,6 +12,8 @@ import {
   confirmFriendController,
 } from "../controllers";
 import { initUpload } from "../config/multer";
+import { verifyUser } from "../middlewares/authMiddlewares/verifyUserMiddleware";
+import { verifyOwnerOrAdmin } from "../middlewares/authMiddlewares/verifyOwnerOrAdminMiddleware";
 
 const uploadImage = initUpload("users");
 
@@ -19,19 +21,31 @@ export const usersRouter = express.Router();
 
 usersRouter
   .route("/")
-  .get(asyncHandler(getUsersController))
+  .get(asyncHandler(verifyUser), asyncHandler(getUsersController))
   .post(uploadImage.single("image"), asyncHandler(createUserController));
 
 usersRouter
   .route("/:uid")
-  .get(asyncHandler(getUserController))
-  .put(uploadImage.single("image"), asyncHandler(editUserController))
-  .delete(asyncHandler(deleteUserController));
+  .get(asyncHandler(verifyUser), asyncHandler(getUserController))
+  .put(
+    asyncHandler(verifyUser),
+    uploadImage.single("image"),
+    asyncHandler(editUserController)
+  )
+  .delete(asyncHandler(verifyOwnerOrAdmin), asyncHandler(deleteUserController));
 
 usersRouter
   .route("/:uid/friends")
-  .get(asyncHandler(getFriendsController))
-  .delete(asyncHandler(deleteFriendController));
+  .get(asyncHandler(verifyUser), asyncHandler(getFriendsController))
+  .delete(asyncHandler(verifyUser), asyncHandler(deleteFriendController));
 
-usersRouter.post("/:uid/addFriend", asyncHandler(addFriendController));
-usersRouter.put("/:uid/confirmFriend", asyncHandler(confirmFriendController));
+usersRouter.post(
+  "/:uid/addFriend",
+  asyncHandler(verifyUser),
+  asyncHandler(addFriendController)
+);
+usersRouter.put(
+  "/:uid/confirmFriend",
+  asyncHandler(verifyUser),
+  asyncHandler(confirmFriendController)
+);

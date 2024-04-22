@@ -19,23 +19,9 @@ export const sendGroupMessage = async (
     .where(eq(users.id, currentUserId));
 
   const group = await db.select().from(groups).where(eq(groups.id, gid));
-  const isAGroupMember = await db
-    .select()
-    .from(members)
-    .where(
-      and(
-        eq(members.groupId, gid),
-        eq(members.userId, currentUserId),
-        ne(members.status, "PENDING")
-      )
-    );
 
   if (!sender.length || !group.length) {
     throw new CustomError("user OR group chat not found", 404);
-  }
-
-  if (!isAGroupMember.length) {
-    throw new CustomError("unAuth!!!", 401);
   }
 
   if (parentId) {

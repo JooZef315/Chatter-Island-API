@@ -10,10 +10,6 @@ export const deleteGroup = async (id: string, currentUserId: string) => {
     throw new CustomError("gid not valid", 400);
   }
 
-  if (group[0].moderator != currentUserId) {
-    throw new CustomError("unAuth!", 401);
-  }
-
   const deletedGroup = await db
     .delete(groups)
     .where(eq(groups.id, id))

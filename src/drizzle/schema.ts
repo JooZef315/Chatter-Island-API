@@ -113,7 +113,7 @@ export const messages = pgTable("messages", {
 export const groupMessages = pgTable("groupMessages", {
   id: uuid("id").primaryKey().defaultRandom(),
   senderId: uuid("senderId")
-    .references(() => users.id, { onDelete: "cascade", onUpdate: "cascade" })
+    .references(() => users.id)
     .notNull(),
   groupId: uuid("groupId")
     .references(() => groups.id, { onDelete: "cascade", onUpdate: "cascade" })

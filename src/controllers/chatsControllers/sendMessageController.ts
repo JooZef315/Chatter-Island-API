@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import { sendMessage } from "../../services/chats/sendMessage";
 import { CustomError } from "../../utils/customErrors";
 import { uploadCareClient } from "../../utils/uploadCareClient";
+import { authenticatedRequest } from "../../middlewares/middleware.types";
 
 // @desc    send a new message to a user
 // @route   POST /api/v1/chats/:cid
@@ -17,7 +18,7 @@ import { uploadCareClient } from "../../utils/uploadCareClient";
 export const sendMessageController = async (req: Request, res: Response) => {
   const cid = req.params.cid;
 
-  const currentUserId: string = req.body.currentUserId;
+  const currentUserId: string = (req as authenticatedRequest).userId;
   const content: string = req.body.content;
   const parentId: string = req.body.parentId || "";
   let profilePicUrl: string | undefined;

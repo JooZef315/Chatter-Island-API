@@ -3,6 +3,7 @@ import { validateUser } from "../../validators/userValidator";
 import { CustomError } from "../../utils/customErrors";
 import { editUser } from "../../services/users/editUser";
 import { uploadCareClient } from "../../utils/uploadCareClient";
+import { authenticatedRequest } from "../../middlewares/middleware.types";
 
 // @desc    update a user
 // @route   PUT /api/v1/users/:uid
@@ -10,7 +11,7 @@ import { uploadCareClient } from "../../utils/uploadCareClient";
 // @param   {string} uid - User ID.
 export const editUserController = async (req: Request, res: Response) => {
   const id = req.params.uid;
-  const currentUserId: string = req.body.currentUserId;
+  const currentUserId: string = (req as authenticatedRequest).userId;
   const { userData, error } = validateUser(req.body);
 
   if (error) {
