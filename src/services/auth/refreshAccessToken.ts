@@ -1,5 +1,6 @@
 import jwt, { JwtPayload } from "jsonwebtoken";
 import { CustomError } from "../../utils/customErrors";
+import { getUser } from "../users/getUser";
 
 type RefreshPyload = JwtPayload & {
   id: string;
@@ -21,21 +22,21 @@ export const refreshAccessToken = async (refreshToken: string) => {
       REFRESH_TOKEN_SECRET
     ) as RefreshPyload;
 
-    const user: any = {};
+    const user: any = await getUser(payload.id);
 
-    if (!user) {
+    if (!user.id) {
       throw new CustomError("Unauthorized user", 401);
     }
 
     const accessToken = jwt.sign(
       {
-        id: user._id,
+        id: user.id,
         username: user.username,
-        role: user.isAdmin ? "admin" : "user",
+        role: user.role,
       },
       ACCESS_TOKEN_SECRET,
       {
-        expiresIn: "60m",
+        expiresIn: "2m",
       }
     );
 

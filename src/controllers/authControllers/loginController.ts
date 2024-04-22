@@ -6,14 +6,14 @@ import { CustomError } from "../../utils/customErrors";
 // @route   POST /api/v1/auth/login
 // @access  Public
 export const loginController = async (req: Request, res: Response) => {
-  const email: string = req.body.email?.trim().toLowerCase() || "";
+  const username: string = req.body.username?.trim().toLowerCase() || "";
   const password: string = req.body.password || "";
 
-  if (!email || !password) {
-    throw new CustomError("email and passowrd required", 400);
+  if (!username || !password) {
+    throw new CustomError("username and passowrd required", 400);
   }
 
-  const { accessToken, refreshToken } = await logIn(email, password);
+  const { accessToken, refreshToken } = await logIn(username, password);
 
   // Create secure cookie with refresh token
   res.cookie("jwt", refreshToken, {

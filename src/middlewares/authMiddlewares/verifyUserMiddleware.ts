@@ -2,7 +2,7 @@ import { Request, Response, NextFunction } from "express";
 import { JwtPayload } from "jsonwebtoken";
 import { CustomError } from "../../utils/customErrors";
 import { verifyToken } from "../../utils/verifyToken";
-// import { getUser } from "../../services/users/getUser";
+import { getUser } from "../../services/users/getUser";
 
 type DecodedData = JwtPayload & {
   id: string;
@@ -19,10 +19,10 @@ export const verifyUser = async (
 ) => {
   const decodedData = verifyToken(req.headers.authorization) as DecodedData;
 
-  const user: any = {};
+  const user: any = await getUser(decodedData.id);
 
-  if (!user) {
-    throw new CustomError("user not found", 404);
+  if (!user.id) {
+    throw new CustomError("invalid token payload", 401);
   }
 
   (req as authenticatedRequest).userId = decodedData.id;
