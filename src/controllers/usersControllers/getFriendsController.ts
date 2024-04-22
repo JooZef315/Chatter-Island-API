@@ -14,8 +14,9 @@ import { getFriends } from "../../services/users/getFriends";
 
 export const getFriendsController = async (req: Request, res: Response) => {
   const id = req.params.uid;
+  const currentUserId: string = req.body.currentUserId;
 
-  const data = await getFriends(id);
+  const data = await getFriends(id, currentUserId);
 
   res.status(200).json(data);
 };

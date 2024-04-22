@@ -1,16 +1,8 @@
 import { Request, Response, NextFunction } from "express";
-import { JwtPayload } from "jsonwebtoken";
 import { CustomError } from "../../utils/customErrors";
 import { verifyToken } from "../../utils/verifyToken";
 import { getUser } from "../../services/users/getUser";
-
-type DecodedData = JwtPayload & {
-  id: string;
-  username: string;
-  role: string;
-};
-
-type authenticatedRequest = Request & DecodedData;
+import { DecodedData, authenticatedRequest } from "../middleware.types";
 
 export const verifyUser = async (
   req: Request,
@@ -19,7 +11,7 @@ export const verifyUser = async (
 ) => {
   const decodedData = verifyToken(req.headers.authorization) as DecodedData;
 
-  const user: any = await getUser(decodedData.id);
+  const user = await getUser(decodedData.id);
 
   if (!user.id) {
     throw new CustomError("invalid token payload", 401);

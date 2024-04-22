@@ -3,9 +3,11 @@ import { CustomError } from "../../utils/customErrors";
 import { verifyToken } from "../../utils/verifyToken";
 import { DecodedData, authenticatedRequest } from "../middleware.types";
 import { getUser } from "../../services/users/getUser";
+import { getChats } from "../../services/chats/getChats";
 import { getGroups } from "../../services/groups/getGroups";
+import { getMembers } from "../../services/groups/getMembers";
 
-export const verifyOwnerOrAdmin = async (
+export const verifyParticipant = async (
   req: Request,
   res: Response,
   next: NextFunction
@@ -18,21 +20,18 @@ export const verifyOwnerOrAdmin = async (
     throw new CustomError("invalid token payload", 401);
   }
 
-  if (req.params.uid) {
-    if (decodedData?.id != req.params.id && decodedData.role !== "ADMIN") {
+  if (req.params.cid) {
+    const chats = await getChats(decodedData.id);
+    const chat = chats.filter((c) => c.chat_id == req.params.cid);
+    if (!chat.length) {
       throw new CustomError("user Unauthorized!", 401);
     }
   }
 
-  //check if moderator
-  if (req.params.gid && !req.params.uid) {
-    const groups = await getGroups();
-    const group = groups.filter((g) => g.id == req.params.gid);
-    if (
-      group.length &&
-      group[0].moderator.user_id != decodedData.id &&
-      decodedData.role !== "ADMIN"
-    ) {
+  if (req.params.gid) {
+    const members = await getMembers(req.params.gid);
+    const member = members.filter((m) => m.user_id == decodedData.id);
+    if (!member.length && decodedData.role !== "ADMIN") {
       throw new CustomError("user Unauthorized", 401);
     }
   }

@@ -16,14 +16,14 @@ export const userZodSchema = z
     password: z
       .string()
       .min(4, { message: "Password must be at least 4 characters long" }),
-    confirmPasswrod: z
+    confirmPassword: z
       .string()
       .min(4, { message: "Password must be at least 4 characters long" }),
     profilePicUrl: z.string().optional(),
   })
-  .refine((data) => data.confirmPasswrod === data.password, {
+  .refine((data) => data.confirmPassword === data.password, {
     message: "Passwords don't match",
-    path: ["confirmPasswrod"],
+    path: ["confirmPassword"],
   });
 
 export const groupZodSchema = z.object({

@@ -56,7 +56,7 @@ export const getChats = async (currentUserId: string) => {
   });
 
   //full chats with last messages
-  const fullChats: any = userChats.map((c) => {
+  const fullChats = userChats.map((c) => {
     const last_message = lastMassages.filter((m) => {
       return m?.chat_id == c.chat_id;
     });

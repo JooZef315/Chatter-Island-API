@@ -10,6 +10,7 @@ import { uploadCareClient } from "../../utils/uploadCareClient";
 // @param   {string} uid - User ID.
 export const editUserController = async (req: Request, res: Response) => {
   const id = req.params.uid;
+  const currentUserId: string = req.body.currentUserId;
   const { userData, error } = validateUser(req.body);
 
   if (error) {
@@ -21,7 +22,7 @@ export const editUserController = async (req: Request, res: Response) => {
     userData.profilePicUrl = profilePic;
   }
 
-  const updatedUser = await editUser(id, userData);
+  const updatedUser = await editUser(id, currentUserId, userData);
 
   res.status(200).json({
     message: `user with id: ${updatedUser[0].id} was updated successfully`,

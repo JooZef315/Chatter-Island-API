@@ -5,11 +5,19 @@ import { users } from "../../drizzle/schema";
 import { CustomError } from "../../utils/customErrors";
 import { TUser } from "../../validators/zodTypes";
 
-export const editUser = async (id: string, userData: TUser) => {
+export const editUser = async (
+  id: string,
+  currentUserId: string,
+  userData: TUser
+) => {
   const user = await db.select().from(users).where(eq(users.id, id));
 
   if (!user.length) {
     throw new CustomError("user not found", 404);
+  }
+
+  if (currentUserId != id) {
+    throw new CustomError("user Unauthorized!", 401);
   }
 
   const existedWithSameUsername = await db

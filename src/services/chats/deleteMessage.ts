@@ -20,7 +20,10 @@ export const deleteMessage = async (
   }
 
   if (currentUserId != message[0].senderId) {
-    throw new CustomError("unAuth!", 401);
+    throw new CustomError(
+      "user is authorized to delete only his own messages",
+      401
+    );
   }
 
   await db.delete(messages).where(eq(messages.id, mid));

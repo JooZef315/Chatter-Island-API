@@ -30,7 +30,7 @@ usersRouter
 
 usersRouter
   .route("/:uid/friends")
-  .get(asyncHandler(getFriendsController)) //verify friends of friends
+  .get(asyncHandler(getFriendsController))
   .delete(asyncHandler(deleteFriendController));
 
 usersRouter.post("/:uid/addFriend", asyncHandler(addFriendController));

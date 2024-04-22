@@ -1,4 +1,4 @@
-import { and, count, eq, ne, or } from "drizzle-orm";
+import { and, count, eq, or } from "drizzle-orm";
 import { db } from "../../config/DB";
 import { users, groups, members } from "../../drizzle/schema";
 
