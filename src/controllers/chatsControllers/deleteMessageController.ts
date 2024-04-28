@@ -7,7 +7,6 @@ import { authenticatedRequest } from "../../middlewares/middleware.types";
 // @access  Private
 // @param   {string} cid - chat ID.
 // @param   {string} mid - message ID.
-
 export const deleteMessageController = async (req: Request, res: Response) => {
   const cid = req.params.cid;
   const mid = req.params.mid;

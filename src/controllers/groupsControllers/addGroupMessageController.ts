@@ -8,13 +8,6 @@ import { authenticatedRequest } from "../../middlewares/middleware.types";
 // @route   POST /api/v1/groups/:gid
 // @access  Private
 // @param   {string} cid - Group ID.
-
-// type authenticatedRequest = Request & {
-//   userId: string;
-//   username: string;
-//   userRole: string;
-// };
-
 export const addGroupMessageController = async (
   req: Request,
   res: Response
@@ -24,7 +17,7 @@ export const addGroupMessageController = async (
   const currentUserId: string = (req as authenticatedRequest).userId;
   const content: string = req.body.content;
   const parentId: string = req.body.parentId || "";
-  let profilePicUrl: string | undefined;
+  let PicUrl: string | undefined;
 
   if (!content && !req.file) {
     throw new CustomError("message content (text or image) is required", 400);
@@ -35,14 +28,14 @@ export const addGroupMessageController = async (
   }
 
   if (req.file) {
-    profilePicUrl = (await uploadCareClient(req.file.path)) || undefined;
+    PicUrl = (await uploadCareClient(req.file.path)) || undefined;
   }
 
   const messageData = {
     gid,
     content,
     parentId,
-    profilePicUrl,
+    PicUrl,
   };
 
   const message = await sendGroupMessage(currentUserId, messageData);

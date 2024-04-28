@@ -7,13 +7,6 @@ import { authenticatedRequest } from "../../middlewares/middleware.types";
 // @access  Private
 // @param   {string} gid - Group ID.
 // @param   {string} uid - User ID.
-
-// type authenticatedRequest = Request & {
-//   userId: string;
-//   username: string;
-//   userRole: string;
-// };
-
 export const membersConfirmController = async (req: Request, res: Response) => {
   const uid = req.params.uid;
   const gid = req.params.gid;

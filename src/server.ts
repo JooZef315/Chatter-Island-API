@@ -5,10 +5,11 @@ import cookieParser from "cookie-parser";
 import cors from "cors";
 import { rootRouter } from "./routes";
 import { errorMiddleware } from "./middlewares/errorMiddleware";
+import { app, server } from "./socket/server";
 
 dotenv.config();
 const PORT = process.env.PORT || 3001;
-const app = express();
+// const app = express();
 
 app.use(
   cors({
@@ -30,6 +31,6 @@ app.all(
 
 app.use(errorMiddleware);
 
-app.listen(PORT, () => {
+server.listen(PORT, () => {
   console.log(`server running on port ${PORT}`);
 });

@@ -7,11 +7,11 @@ type Params = {
   cid: string;
   content: string;
   parentId: string;
-  profilePicUrl: string | undefined;
+  PicUrl: string | undefined;
 };
 export const sendMessage = async (
   currentUserId: string,
-  { cid, content, parentId, profilePicUrl }: Params
+  { cid, content, parentId, PicUrl }: Params
 ) => {
   const sender = await db
     .select()
@@ -25,7 +25,7 @@ export const sendMessage = async (
   }
 
   if (chat[0].user1 != currentUserId && chat[0].user2 != currentUserId) {
-    throw new CustomError("unAuth!!!", 401);
+    throw new CustomError("user is Unauthorized!", 401);
   }
 
   if (parentId) {
@@ -43,7 +43,7 @@ export const sendMessage = async (
     .values({
       senderId: currentUserId,
       chatId: cid,
-      content: profilePicUrl || content,
+      content: PicUrl || content,
       parentId: parentId || null,
     })
     .returning();

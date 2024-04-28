@@ -1,8 +1,6 @@
 import { Request, Response } from "express";
 import { getUser } from "../../services/users/getUser";
 
-// TODO: use query - populate
-
 // @desc    get a user
 // @route   GET /api/v1/users/:uid
 // @access  Private

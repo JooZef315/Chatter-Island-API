@@ -7,11 +7,11 @@ type Params = {
   gid: string;
   content: string;
   parentId: string;
-  profilePicUrl: string | undefined;
+  PicUrl: string | undefined;
 };
 export const sendGroupMessage = async (
   currentUserId: string,
-  { gid, content, parentId, profilePicUrl }: Params
+  { gid, content, parentId, PicUrl }: Params
 ) => {
   const sender = await db
     .select()
@@ -44,7 +44,7 @@ export const sendGroupMessage = async (
     .values({
       senderId: currentUserId,
       groupId: gid,
-      content: profilePicUrl || content,
+      content: PicUrl || content,
       parentId: parentId || null,
     })
     .returning();

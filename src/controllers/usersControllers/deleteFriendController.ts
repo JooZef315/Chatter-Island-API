@@ -6,13 +6,6 @@ import { authenticatedRequest } from "../../middlewares/middleware.types";
 // @route   DELETE /api/v1/users/:uid/follow
 // @access  Private
 // @param   {string} uid - User ID.
-
-// type authenticatedRequest = Request & {
-//   userId: string;
-//   username: string;
-//   userRole: string;
-// };
-
 export const deleteFriendController = async (req: Request, res: Response) => {
   const id = req.params.uid;
 
