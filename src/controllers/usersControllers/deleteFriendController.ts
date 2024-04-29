@@ -3,7 +3,7 @@ import { removeFriend } from "../../services/users/removeFriend";
 import { authenticatedRequest } from "../../middlewares/middleware.types";
 
 // @desc    unfriend a user
-// @route   DELETE /api/v1/users/:uid/follow
+// @route   DELETE /api/v1/users/:uid/friends
 // @access  Private
 // @param   {string} uid - User ID.
 export const deleteFriendController = async (req: Request, res: Response) => {

@@ -7,7 +7,7 @@ import { authenticatedRequest } from "../../middlewares/middleware.types";
 // @desc    send a new message to a group
 // @route   POST /api/v1/groups/:gid
 // @access  Private
-// @param   {string} cid - Group ID.
+// @param   {string} gid - Group ID.
 export const addGroupMessageController = async (
   req: Request,
   res: Response
