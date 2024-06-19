@@ -1,10 +1,8 @@
 {
-  "id": "ad26b206-c586-4bbb-9968-054e3491dd84",
-  "prevId": "56cab992-b1b5-4c27-adaf-a72f94c02786",
-  "version": "5",
-  "dialect": "pg",
+  "version": "7",
+  "dialect": "postgresql",
   "tables": {
-    "chats": {
+    "public.chats": {
       "name": "chats",
       "schema": "",
       "columns": {
@@ -33,43 +31,43 @@
         "chats_user1_users_id_fk": {
           "name": "chats_user1_users_id_fk",
           "tableFrom": "chats",
-          "tableTo": "users",
           "columnsFrom": [
             "user1"
           ],
+          "tableTo": "users",
           "columnsTo": [
             "id"
           ],
-          "onDelete": "cascade",
-          "onUpdate": "cascade"
+          "onUpdate": "cascade",
+          "onDelete": "cascade"
         },
         "chats_user2_users_id_fk": {
           "name": "chats_user2_users_id_fk",
           "tableFrom": "chats",
-          "tableTo": "users",
           "columnsFrom": [
             "user2"
           ],
+          "tableTo": "users",
           "columnsTo": [
             "id"
           ],
-          "onDelete": "cascade",
-          "onUpdate": "cascade"
+          "onUpdate": "cascade",
+          "onDelete": "cascade"
         }
       },
       "compositePrimaryKeys": {},
       "uniqueConstraints": {
         "unique_chat": {
           "name": "unique_chat",
-          "nullsNotDistinct": false,
           "columns": [
             "user1",
             "user2"
-          ]
+          ],
+          "nullsNotDistinct": false
         }
       }
     },
-    "friends": {
+    "public.friends": {
       "name": "friends",
       "schema": "",
       "columns": {
@@ -104,43 +102,43 @@
         "friends_user1_users_id_fk": {
           "name": "friends_user1_users_id_fk",
           "tableFrom": "friends",
-          "tableTo": "users",
           "columnsFrom": [
             "user1"
           ],
+          "tableTo": "users",
           "columnsTo": [
             "id"
           ],
-          "onDelete": "cascade",
-          "onUpdate": "cascade"
+          "onUpdate": "cascade",
+          "onDelete": "cascade"
         },
         "friends_user2_users_id_fk": {
           "name": "friends_user2_users_id_fk",
           "tableFrom": "friends",
-          "tableTo": "users",
           "columnsFrom": [
             "user2"
           ],
+          "tableTo": "users",
           "columnsTo": [
             "id"
           ],
-          "onDelete": "cascade",
-          "onUpdate": "cascade"
+          "onUpdate": "cascade",
+          "onDelete": "cascade"
         }
       },
       "compositePrimaryKeys": {},
       "uniqueConstraints": {
         "unique_friendship": {
           "name": "unique_friendship",
-          "nullsNotDistinct": false,
           "columns": [
             "user1",
             "user2"
-          ]
+          ],
+          "nullsNotDistinct": false
         }
       }
     },
-    "groupMessages": {
+    "public.groupMessages": {
       "name": "groupMessages",
       "schema": "",
       "columns": {
@@ -188,47 +186,47 @@
         "groupMessages_senderId_users_id_fk": {
           "name": "groupMessages_senderId_users_id_fk",
           "tableFrom": "groupMessages",
-          "tableTo": "users",
           "columnsFrom": [
             "senderId"
           ],
+          "tableTo": "users",
           "columnsTo": [
             "id"
           ],
-          "onDelete": "no action",
-          "onUpdate": "no action"
+          "onUpdate": "no action",
+          "onDelete": "no action"
         },
         "groupMessages_groupId_groups_id_fk": {
           "name": "groupMessages_groupId_groups_id_fk",
           "tableFrom": "groupMessages",
-          "tableTo": "groups",
           "columnsFrom": [
             "groupId"
           ],
+          "tableTo": "groups",
           "columnsTo": [
             "id"
           ],
-          "onDelete": "cascade",
-          "onUpdate": "cascade"
+          "onUpdate": "cascade",
+          "onDelete": "cascade"
         },
         "groupMessages_parentId_groupMessages_id_fk": {
           "name": "groupMessages_parentId_groupMessages_id_fk",
           "tableFrom": "groupMessages",
-          "tableTo": "groupMessages",
           "columnsFrom": [
             "parentId"
           ],
+          "tableTo": "groupMessages",
           "columnsTo": [
             "id"
           ],
-          "onDelete": "cascade",
-          "onUpdate": "cascade"
+          "onUpdate": "cascade",
+          "onDelete": "cascade"
         }
       },
       "compositePrimaryKeys": {},
       "uniqueConstraints": {}
     },
-    "groups": {
+    "public.groups": {
       "name": "groups",
       "schema": "",
       "columns": {
@@ -271,29 +269,29 @@
         "groups_moderator_users_id_fk": {
           "name": "groups_moderator_users_id_fk",
           "tableFrom": "groups",
-          "tableTo": "users",
           "columnsFrom": [
             "moderator"
           ],
+          "tableTo": "users",
           "columnsTo": [
             "id"
           ],
-          "onDelete": "cascade",
-          "onUpdate": "cascade"
+          "onUpdate": "cascade",
+          "onDelete": "cascade"
         }
       },
       "compositePrimaryKeys": {},
       "uniqueConstraints": {
         "groups_name_unique": {
           "name": "groups_name_unique",
-          "nullsNotDistinct": false,
           "columns": [
             "name"
-          ]
+          ],
+          "nullsNotDistinct": false
         }
       }
     },
-    "members": {
+    "public.members": {
       "name": "members",
       "schema": "",
       "columns": {
@@ -328,43 +326,43 @@
         "members_userId_users_id_fk": {
           "name": "members_userId_users_id_fk",
           "tableFrom": "members",
-          "tableTo": "users",
           "columnsFrom": [
             "userId"
           ],
+          "tableTo": "users",
           "columnsTo": [
             "id"
           ],
-          "onDelete": "cascade",
-          "onUpdate": "cascade"
+          "onUpdate": "cascade",
+          "onDelete": "cascade"
         },
         "members_groupId_groups_id_fk": {
           "name": "members_groupId_groups_id_fk",
           "tableFrom": "members",
-          "tableTo": "groups",
           "columnsFrom": [
             "groupId"
           ],
+          "tableTo": "groups",
           "columnsTo": [
             "id"
           ],
-          "onDelete": "cascade",
-          "onUpdate": "cascade"
+          "onUpdate": "cascade",
+          "onDelete": "cascade"
         }
       },
       "compositePrimaryKeys": {},
       "uniqueConstraints": {
         "unique_membership": {
           "name": "unique_membership",
-          "nullsNotDistinct": false,
           "columns": [
             "userId",
             "groupId"
-          ]
+          ],
+          "nullsNotDistinct": false
         }
       }
     },
-    "messages": {
+    "public.messages": {
       "name": "messages",
       "schema": "",
       "columns": {
@@ -412,47 +410,47 @@
         "messages_senderId_users_id_fk": {
           "name": "messages_senderId_users_id_fk",
           "tableFrom": "messages",
-          "tableTo": "users",
           "columnsFrom": [
             "senderId"
           ],
+          "tableTo": "users",
           "columnsTo": [
             "id"
           ],
-          "onDelete": "cascade",
-          "onUpdate": "cascade"
+          "onUpdate": "cascade",
+          "onDelete": "cascade"
         },
         "messages_chatId_chats_id_fk": {
           "name": "messages_chatId_chats_id_fk",
           "tableFrom": "messages",
-          "tableTo": "chats",
           "columnsFrom": [
             "chatId"
           ],
+          "tableTo": "chats",
           "columnsTo": [
             "id"
           ],
-          "onDelete": "cascade",
-          "onUpdate": "cascade"
+          "onUpdate": "cascade",
+          "onDelete": "cascade"
         },
         "messages_parentId_messages_id_fk": {
           "name": "messages_parentId_messages_id_fk",
           "tableFrom": "messages",
-          "tableTo": "messages",
           "columnsFrom": [
             "parentId"
           ],
+          "tableTo": "messages",
           "columnsTo": [
             "id"
           ],
-          "onDelete": "cascade",
-          "onUpdate": "cascade"
+          "onUpdate": "cascade",
+          "onDelete": "cascade"
         }
       },
       "compositePrimaryKeys": {},
       "uniqueConstraints": {}
     },
-    "users": {
+    "public.users": {
       "name": "users",
       "schema": "",
       "columns": {
@@ -510,35 +508,39 @@
       "uniqueConstraints": {
         "users_username_unique": {
           "name": "users_username_unique",
-          "nullsNotDistinct": false,
           "columns": [
             "username"
-          ]
+          ],
+          "nullsNotDistinct": false
         }
       }
     }
   },
   "enums": {
-    "friendsEnum": {
+    "public.friendsEnum": {
       "name": "friendsEnum",
-      "values": {
-        "JOINED": "JOINED",
-        "PENDING": "PENDING",
-        "MODERATOR": "MODERATOR"
-      }
+      "schema": "public",
+      "values": [
+        "JOINED",
+        "PENDING",
+        "MODERATOR"
+      ]
     },
-    "roleEnum": {
+    "public.roleEnum": {
       "name": "roleEnum",
-      "values": {
-        "USER": "USER",
-        "ADMIN": "ADMIN"
-      }
+      "schema": "public",
+      "values": [
+        "USER",
+        "ADMIN"
+      ]
     }
   },
   "schemas": {},
   "_meta": {
-    "columns": {},
     "schemas": {},
-    "tables": {}
-  }
+    "tables": {},
+    "columns": {}
+  },
+  "id": "ad26b206-c586-4bbb-9968-054e3491dd84",
+  "prevId": "56cab992-b1b5-4c27-adaf-a72f94c02786"
 }

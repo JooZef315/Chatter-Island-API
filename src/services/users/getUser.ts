@@ -22,7 +22,7 @@ export const getUser = async (id: string) => {
     })
     .from(users)
     .where(eq(users.id, id))
-    .innerJoin(
+    .leftJoin(
       userAlias,
       or(eq(users.id, userAlias.user1), eq(users.id, userAlias.user2))
     )

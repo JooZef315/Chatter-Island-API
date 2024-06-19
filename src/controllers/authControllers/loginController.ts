@@ -20,7 +20,7 @@ export const loginController = async (req: Request, res: Response) => {
     httpOnly: true, //accessible only by web server
     secure: false, //https
     sameSite: "none", //cross-site cookie
-    maxAge: 1 * 24 * 60 * 60 * 1000, //cookie expiry
+    maxAge: 7 * 24 * 60 * 60 * 1000, //cookie expiry
   });
 
   res.status(200).json({ accessToken });

@@ -10,7 +10,6 @@ export const getUsersController = async (req: Request, res: Response) => {
     typeof req.query.search === "string"
       ? req.query.search.trim().toLowerCase()
       : "";
-
   const data = await getUsers(search);
   res.status(200).json(data);
 };

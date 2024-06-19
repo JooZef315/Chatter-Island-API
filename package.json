@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "nodemon src/server.ts",
     "socket": "nodemon src/socket/index.ts",
-    "db:generate": "drizzle-kit generate:pg --schema ./src/drizzle/schema.ts --out ./src/drizzle/migrations",
+    "db:generate": "drizzle-kit generate --config=./src/config/drizzle.config.ts",
     "db:migrate": "ts-node ./src/drizzle/migrate.ts",
     "db:drop": "drizzle-kit drop --config=./src/config/drizzle.config.ts",
     "db:studio": "drizzle-kit studio --port 4000 --verbose --config=./src/config/drizzle.config.ts"
@@ -26,19 +26,19 @@
     "@types/multer": "^1.4.11",
     "@types/node": "^20.12.7",
     "@types/uuid": "^9.0.8",
-    "drizzle-kit": "^0.20.14",
+    "drizzle-kit": "^0.22.7",
     "nodemon": "^3.1.0",
     "ts-node": "^10.9.2",
     "typescript": "^5.4.5"
   },
   "dependencies": {
-    "@neondatabase/serverless": "^0.9.0",
+    "@neondatabase/serverless": "^0.9.3",
     "@uploadcare/upload-client": "^6.14.1",
     "bcryptjs": "^2.4.3",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
-    "drizzle-orm": "^0.30.8",
+    "drizzle-orm": "^0.31.2",
     "express": "^4.19.2",
     "express-async-handler": "^1.2.0",
     "jsonwebtoken": "^9.0.2",
